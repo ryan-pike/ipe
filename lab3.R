@@ -28,7 +28,7 @@ library(haven); library(ggplot2); library(patchwork); library(fixest)
 # if you are interested, the full paper will be added to the course moodle after
 # the lab. 
 
-# The data file we are working with today is called XK.
+# The data file we are working with today is called "lab3.csv".
 
 
 # Data Import
