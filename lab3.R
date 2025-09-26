@@ -61,7 +61,7 @@ lab3 <- read.csv(file = "lab3.csv")
 
 View(lab3)
 
-# Now, lets assess the economcs. Is greater import competition associated with 
+# Now, lets assess the economics. Is greater import competition associated with 
 # increased manufacturing job loss? 
 
 lab3 %>% 
@@ -87,9 +87,9 @@ lab3 %>%
 
 #-----------------------------------------------------------------------------#
 
-# To assess this question, we are going to work with quartiled version of manufacturing loss,
+# To assess this question, we are going to work with a quartiled version of manufacturing loss,
 # instead of the continuous one that we just used. There are several versions of 
-# this variable, we'll start with XK
+# this variable, we'll start with manu_quartile. 
 
 # We'll start by plotting the relationship between manufacturing loss, our 
 # independent variable, and democratic vote share, our dependent or outcome 
@@ -108,13 +108,17 @@ lab3 %>%
 a <- lab3 %>% 
   ggplot(data = ., aes(x = manu_quartile, y = dvs)) +
   stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun.data = mean_cl_normal, geom = "errorbar")
-
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar") 
+a
 # How does this revise our interpretation? 
 
-# Let's now consider whether certain this relationship between job loss and 
+# Let's now consider whether this relationship between job loss and 
 # voting behavior holds for different groups, namely by gender and race. Given 
-# that white males dominate the manufacturing sector, 
+# that white males dominate the manufacturing sector, the aggregate trends we 
+# observe might be driven by this group. We'll build on some of the ideas 
+# related to ethnocentrism and status loss to consider differences or heterogeneity
+# in the political response to economic shocks by demographic groups or identity 
+# characteristics.
 
 # Let's start with gender. 
 
@@ -137,7 +141,7 @@ b <- lab3 %>%
 # To ease interpretation lets compare the two graphs side by side:
 
 
-(a | b)
+# (a | b)
 
 # How did this compare with your group hypothesis? What might be some reasons 
 # behind this finding?

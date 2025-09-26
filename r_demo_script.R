@@ -36,7 +36,7 @@
 
 getwd() # <-- If the files are not in this folder on your computer, you cannot read them in
 
-setwd() # We can change the directory with this command and giving a file path in ""
+setwd("C:/Users/rmpik/Downloads") # We can change the directory with this command and giving a file path in ""
 
 # Note: if you use a windows computer, you need to replace the \ in the file 
 # path with \, if you copy the location of your files from the explorer. 
