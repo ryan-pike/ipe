@@ -17,8 +17,12 @@ if (!requireNamespace("ggplot2", quietly = TRUE)) {
 if (!requireNamespace("fixest", quietly = TRUE)) {
   install.packages("fixest")
 }
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
+
 ##Load necessary libraries####
-library(haven); library(ggplot2); library(patchwork); library(fixest)
+library(tidyverse); library(haven); library(ggplot2); library(patchwork); library(fixest)
 #------------------------------------------------------------------------------#
 
 # How do manufacturing workers vote when they lose their jobs to import competition?
@@ -91,7 +95,7 @@ lab3 %>%
 # instead of the continuous one that we just used. There are several versions of 
 # this variable, we'll start with manu_quartile. 
 
-# We'll start by plotting the relationship between manufacturing loss, our 
+# We'll begin by plotting the relationship between manufacturing loss, our 
 # independent variable, and democratic vote share, our dependent or outcome 
 # variable. 
 
@@ -121,6 +125,9 @@ a
 # characteristics.
 
 # Let's start with gender. 
+
+# In small groups, discuss whether you expect the relationship to be similar for 
+# men versus women? 
 
 lab3 %>% 
   ggplot(data = ., aes(x = f_quartile, y = dvs)) +
