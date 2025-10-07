@@ -148,7 +148,7 @@ b <- lab3 %>%
 # To ease interpretation lets compare the two graphs side by side:
 
 
-# (a | b)
+ (a | b)
 
 # How did this compare with your group hypothesis? What might be some reasons 
 # behind this finding?
