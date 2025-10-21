@@ -26,7 +26,7 @@ if (!requireNamespace("fixest", quietly = TRUE)) {
   install.packages("fixest")
 }
 
-library(haven); library(ggplot2); library(patchwork); library(fixest)
+library(haven); library(ggplot2); library(patchwork); library(fixest); library(tidyverse)
 
 # Set the working directory and import the data:
 
@@ -63,7 +63,7 @@ dim(lab4)
 
 # In small groups, discuss the primary differences between the two and how this 
 # shapes representation and accountability to voters. Then consider how this might impact
-# willingness to impose taxes on voters.
+# willingness to impose taxes on voters. Hint: think about electoral competition
 
 # First, lets look at the distribution of countries and institutions:
 
