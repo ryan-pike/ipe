@@ -6,9 +6,10 @@
 
 # The Original Sin argument suggests that developing countries are unlikely to 
 # be able to issue loans in their own currency as foreign investors are concerned
-# about risks related to currency manipulation and more generally the exchange 
-# rate. In today's lab, we will investigate the empirical validity of this 
-# argument using novel data from 1990-2016 among non-OECD countries. 
+# about risks related to currency manipulation, the exchange rate, and reputation 
+# or creditworthiness more generally. In today's lab, we will investigate the 
+# empirical validity of this argument using novel data from 1990-2016 among 
+# non-OECD countries. 
 
 # If you are unfamiliar with the OECD, see here: https://en.wikipedia.org/wiki/OECD
 
@@ -97,7 +98,7 @@ bonds_df %>%
 # institutions? 
 
 # Fill in the VARIABLE--HERE in the regression equation with the variables from
-# the bond_df you think might be good ways of government tying their hands. 
+# the bonds_df you think might be good ways of government tying their hands. 
 
 bonds_df %>% 
   feols(domestic_pct ~ VARIABLE--HERE | country + year, cluster = ~ country)
@@ -132,7 +133,7 @@ bonds_df %>%
 
 # We've seen thus far that certain types of institutions can help governments 
 # appear more likey to repay their sovereign debt. We've also seen that ideology
-# shapes the which governments are more or less likely to use domestically
+# shapes which governments are more or less likely to use domestically
 # denominated sovereign bonds. Now, foreign lenders might have read the political
 # science literature and understand that left-leaning governments prefer to have
 # domestically denominated bonds, but also the ability to engage in counter-cyclical
@@ -145,7 +146,7 @@ bonds_df %>%
 # under different institutional settings. We'll first take a look at central 
 # bank independence. 
 
-# Do we think central bank indepedence will increase or decrease left-leaning 
+# Do we think central bank independence will increase or decrease left-leaning 
 # governments ability to denominate sovereign bonds in domestic currency? Discuss
 # in small groups.
 
@@ -153,7 +154,7 @@ m1 <- bonds_df %>%
   feols(domestic_pct ~ i(govt_type, ref = "Center") +
           i(govt_type, highCBI, ref = "Center") | country + year,
         cluster = ~country)
-
+m1
 # What is our interpretation? 
 
 # In table format this can be a bit challenging. Let's visualize the interactions
@@ -169,7 +170,7 @@ as.data.frame(tibble(
          upr = estimate + 2 * se) %>% 
   ggplot(data = ., aes(x = factor(highCBI), y = estimate, group = group, color = group)) +
   geom_point(position = position_dodge(width = 0.2), size = 5) + 
-  geom_errorbar(aes(ymin = lwr, ymax = upr), position = position_dodge(width = 0.2), width = 0, size = 2.5) + 
+  geom_errorbar(aes(ymin = lwr, ymax = upr), position = position_dodge(width = 0.2), width = 0, linewidth = 2.5) + 
   geom_hline(yintercept = 0, color = "red", linetype = "dashed") + 
   coord_flip() + xlab("High Central Bank Independence?") + ylab("Average Domestically Denominated") +
   labs(color = "Party Ideology")
@@ -194,7 +195,8 @@ m2
 # than a fixed XR.
 
 # Step 4: Are there costs then for domestically denominated bonds? Let's consider
-# two other components of bonds: maturity and the interest rate.
+# two other components of bonds: maturity (or the duration of the loan) and the
+# interest rate.
 
 bonds_df %>% 
   feols(domestic_pct ~ duration + bond_r | country)
@@ -206,3 +208,17 @@ bonds_df %>%
 # continuous variables in an upcoming lab
 
 range(bonds_df$bond_r, na.rm = T)
+
+# Big Picture: We've seen evidence that suggests a slight reframing of the 
+# Original Sin hypothesis, while developing countries are able to denominate 
+# debt in the local currency, there is plenty agency on the part of developing
+# countries to do so. Rather than passive bargainers, we see plenty of evidence
+# of governments engaging in credible commitments to alleviate some of the concerns
+# of foreign lenders. CBI, in particular, is one way by which left-leaning gov'ts 
+# can tie their hands. Methodologically, we've looked at understanding and interpreting
+# interaction effects, that is when we multiple two variables on the right-hand side
+# of our regression equations. To interpret this it is important to consider what the
+# baseline is, today we considered those observations with low CBI, observing that the 
+# increase in domestically-denominated debt by left-leaning gov'ts is only more likely 
+# under conditions of high CBI. Put differently, we observe heterogeneous effects
+# of ideology at varying levels of CBI. 

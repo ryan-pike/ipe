@@ -92,4 +92,12 @@ m3 <- cleaned_df %>%
   feols(domestic_pct ~ i(govt_type, ref = "Center") + i(govt_type, highCBI, ref = "Center") + i(govt_type, double_commitment, ref = "Center") | country + year, cluster = ~ country)
 
 
+write.csv(file = "bonds_df.csv", x = cleaned_df)
 
+
+bonds_df %>% 
+  mutate(double_commitment = ifelse(highCBI == 1 & fixed_xr == 1, 1, 0)) %>% 
+  filer(govt_type = "Right")
+  feols(domestic_pct ~ i(govt_type, ref = "Center") + 
+          i(govt_type, highCBI, ref = "Center") | country + year,
+        cluster = ~ country)
